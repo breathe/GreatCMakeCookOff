@@ -135,7 +135,8 @@ function(_pm_add_python_extension module)
         ${${ext}_TARGET} MODULE_TARGET ${${ext}_MODULE_TARGET})
 
     add_library(${module_target} MODULE ${${ext}_SOURCES} ${${ext}_OBJECTS})
-    target_link_libraries(${module_target} ${PYTHON_LIBRARIES})
+    # Fix bug when building against anaconda python > 3.4 -- don't link against libpython
+    # target_link_libraries(${module_target} ${PYTHON_LIBRARIES})
     set(output_dir "${location}")
     if(NOT IS_ABSOLUTE "${location}")
         set(output_dir "${PYTHON_BINARY_DIR}/${location}")
